@@ -31,7 +31,7 @@
          <div style = "min-width: 40%;">
             <center> 
 				<a href="/video/in/forgetpass/" style="margin-left: ;">Forgot Password?</a><br>
-				<a href="{% url 'sign_up' %}" style="margin-left: ;">Sign Up?</a>
+				<a href="{% url 'sign_up' %}" style="margin-left: ;">Sign Up?</a><br>
                <button style = "border:0px; background-color:#4285F4; margin-top:8%;
                   height:35px; width:50%;margin-left:;" type = "submit" 
                   value = "Login" >
