@@ -4,7 +4,7 @@
 	  {{ error }}
       <form name = "form" action = "{% url 'login' %}"  method = "POST" >{% csrf_token %}
          
-         <div style = "max-width:470px;">
+         <div style = "min-width: 40%;">
             <center> {{ MyLoginForm.username.label_tag }}
                <input type = "text" style = "margin-left:20%;" 
                   placeholder = "Identifiant" name = "username" value="{{ MyLoginForm.username.value|default:"" }}"/>
@@ -16,7 +16,7 @@
 			
          <br>
   
-         <div style = "max-width:470px;">
+         <div style = "min-width: 40%;">
             <center>{{ MyLoginForm.password.label_tag }}
                <input type = "password" style = "margin-left:20%;" 
                   placeholder = "password" name = "password" value="{{ MyLoginForm.password.value|default:"" }}" />
@@ -28,7 +28,7 @@
 			
          <br>
          
-         <div style = "max-width:470px;">
+         <div style = "min-width: 40%;">
             <center> 
 				<a href="/video/in/forgetpass/" style="margin-left: 20%;">Forgot Password?</a><br>
 				<a href="{% url 'sign_up' %}" style="margin-left: 20%;">Sign Up?</a>
