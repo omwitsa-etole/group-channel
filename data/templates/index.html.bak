@@ -34,7 +34,7 @@
 		</div>
 		<div class="home_nav">
 		<div class="home_nav_cont">
-			<a href="{% url 'index_out' %}" class="active">VIDEOS</a>
+			<a href="{% url 'index' %}" class="active">VIDEOS</a>
 			<a href="{% url 'image_out_view' %}">IMAGES</a>
 			<a href="{%  url 'questions_out' %}">Q&A</a>
 		</div>
