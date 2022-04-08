@@ -1,3 +1,15 @@
+body {
+	height: 100%;
+	width: 100%;
+	text-align: justify;
+}
+@media only screen and (max-width: 900px) {
+  body {
+    height: 100%;
+	width: 100%;
+	text-align: justify;
+  }
+}
 .menu_btn {
   border: none;
   outline: none;
@@ -242,9 +254,10 @@ ul {
 .home_nav_cont a{
 	text-align: center;
 	display: block;
+	text-align: justify;
 	margin-top: 10%;
 	width: 90%;
-	height: 7%;
+	height: 15%;
 	border: line;
 	text-decoration: none;
 	font-size: 20px;
