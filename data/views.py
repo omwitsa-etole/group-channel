@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views import generic
+from django.views import generic, View
 from .models import Video, Channel, User, Image, Comment, Question
 from .forms import VideoForm, ImageForm, SignUpForm
 from .forms import LoginForm, CommentForm, QuestionForm
@@ -8,6 +8,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
+from django.contrib import messages
+
 
 def log_in(request):
     error = '';
@@ -54,21 +56,27 @@ def logout(request):
       pass
    return HttpResponse("<strong>You are logged out.</strong><a href='/video/in/'>login </a>")
   
-def SignUpView(request):
-    error = '';
-    if request.method == "POST":
-        form = SignUpForm(data=request.POST)
-  
+class SignUpView(View):
+    form_class = SignUpForm
+    initial = {'key': 'value'}
+    template_name = 'signup.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class(initial=self.initial)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
         if form.is_valid():
             form.save()
-            error = 'Account Created succesfully'
-        else: 
-            error = 'Failed to create account';
-       
-    else:
-        form = SignUpForm()
-    
-    return render(request, 'signup.html', locals())
+
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Account created for {username}')
+
+            return redirect(to='/login/')
+
+        return render(request, self.template_name, {'form': form})
     
 def SaveVideo(request):
     
