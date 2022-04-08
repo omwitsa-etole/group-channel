@@ -1,0 +1,19 @@
+{% extends "base2.html" %}
+
+{% block content %}
+<div class="alert_success">
+{% if new_image %}
+	<div class="alert_content">
+	<p>Image was Successfully Uploaded</p>
+	</div>
+{% endif%}
+</div>
+<form name = "form" enctype = "multipart/form-data" action = "" method = "POST" >{% csrf_token %}
+<div class="upload-video">
+	{{ MyImageForm.as_p }}
+	{% csrf_token %}
+	<br>
+	<input type="submit" value="Upload" style="float:right;margin-right: 20%;padding: 9px;background: blue;border: none;">
+</div>   
+</form>
+{%endblock%}

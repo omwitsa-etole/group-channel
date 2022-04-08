@@ -1,0 +1,42 @@
+{% extends "base2.html" %}
+	{% block title %}
+		<title>HOME</title>
+	{% endblock %}
+	{% block content %}
+		<div>
+			{% for video in video_list %}
+				<div class="video_container">
+				<p id="dropbtn" onclick="showmenu({{ video.id }})" style="float: right;">...</p>
+				<div class="context-menu" id="context-menu">
+				<div class="menu" id="{{ video.id }}">
+				<a href="">Add to Qeue</a>
+				<a href="{{ MEDIA_URL }}{{ video.upload }}" download="{{ query.title }}.mp4">Save for later</i></a>
+				<a href='{{ video.get_absolute_url }}' target="_blank">Open Video in new tab</a>
+				<a href=""><i>Copy Video Url</i></a>
+				</div>
+				</div>
+				<table>
+				<td id="table" onclick="window.location='{{ video.get_absolute_url }}'" style="cursor: pointer;">
+				<video width="50%" height="80%" controls> <source src="{{ MEDIA_URL }}{{ video.upload }}" type="video/mp4"></video>
+				<div class="vid_description">
+				<span style="font-family: Times-New-Roman;font-size: 20px;text-align:justify;">{{ video.title }}</span><br>
+				<p style="font-family: Times New  Roman;font-size: 17px;">{{ video.description }}</p>
+				</div><br>
+				<span style="text-decoration: none;">{{ video.date_created }}</span>
+				</td>
+				</table>
+				</div>
+			{% empty %}
+				<div>
+					<center><br><p>No Video Found</p></center>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="home_nav">
+		<div class="home_nav_cont">
+			<a href="{% url 'video_out' %}" class="active">VIDEOS</a>
+			<a href="{% url 'image_out_view' %}">IMAGES</a>
+			<a href="{%  url 'questions_in' %}">Q&A</a>
+		</div>
+	</div>
+	{%endblock %}

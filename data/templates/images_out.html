@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="image_container">
+		{% for image in image_list %}
+			<div class="image_ls">
+				<img id="{{ image.id }}" src="{{ MEDIA_URL }}{{ image.picture }}" type="image">
+			</div>
+			<div class="title">{{ image.title }}</div>
+		{% empty %}
+			<div style="margin-top: 5%;margin-left: -10%;">
+				<center><p>There Are no Images</p></center>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="home_nav">
+	<div class="home_nav_cont">
+		<a href="{% url 'video_out' %}">VIDEOS</a>
+		<a href="{% url 'image_out_view' %}" class="active">IMAGES</a>
+		<a href="{%  url 'questions_out' %}">Q&A</a>
+	</div>
+{% endblock %}

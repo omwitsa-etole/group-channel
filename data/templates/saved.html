@@ -1,0 +1,18 @@
+
+{% extends "base.html" %}
+
+<div>
+	<div>
+	{% block content %}   
+	  {% if saved %}
+		 <strong>Your Video was saved.</strong>
+	  {% endif %}
+	  
+	  {% if not saved %}
+		 <strong>Your Video was not saved.</strong>
+	  {% endif %}
+	{%endblock%} 
+	<button style="float: right;padding: 9px;color: red;">exit</button>
+	</div>
+</div> 
+  

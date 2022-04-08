@@ -1,0 +1,34 @@
+{% extends "questions.html" %}
+
+{% block content %}
+<div style="position: fixed;z-index: 2;width: 100%;height: 100%;background: #ddd;">
+<div style="width: 50%;height: 600px;margin-left: 20%;margin-top: 3%;">
+	<div style="background: white;height: 100%;display: block;overflow: auto;">
+	<button style="float: right;color: red;" onclick="history.back()">&times</button>
+	<h2>{{question.question}}</h2>
+		<div style="width: 95%;height: 50%;margin-left: 2%;background: #ddd;border-radius: 10px;">
+		<p style="margin-left: 2%;">{{question.more_description}}<p>
+		</div><br>
+		<div>Category:</div> <br>
+		<div class="all_answers">
+		<h3>Answers</h3>
+			<div class="answer_form">
+			<form method="POST"	>
+				{{ answer_form.as_p }}
+				<button type="submit">+ANSWER</button>
+			</form>
+			</div>
+			<div class="answer" style="margin-top: 5%;">
+				{% for answer in answers %}
+					<div>
+						{{answer.commenting | linebreaks}}
+					</div>
+				{% empty %}
+					<div>No Answers Be The first to answer</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+{% endblock %}

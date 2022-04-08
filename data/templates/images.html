@@ -1,0 +1,23 @@
+{% extends "base2.html" %}
+	{% block title %}
+		<title>HOME|IMAGES</title>
+	{% endblock %}
+	{% block content %}
+	<div class="image_container">
+		{% for image in image_list %}
+			<div class="image_ls">
+				<a href="{{ image.get_absolute_url }}"><img class="img" src="{{ MEDIA_URL }}{{ image.picture }}" type="image"></a>
+			</div>
+			<div class="title" style="display:none;position: absolute;">{{ image.title }}</div>
+		{% empty %}
+			<div>
+				<p>There is no Content</p>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="home_nav">
+	<div class="home_nav_cont">
+		<a href="/video/in/">VIDEOS</a>
+		<a href="/video/in/images/" class="active">IMAGES</a>
+	</div>
+{% endblock %}

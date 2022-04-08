@@ -1,0 +1,27 @@
+{% extends "settings.html" %}
+{% block cont %}
+	<div id="changepass">
+	<h1>Change Password</h1>
+		<div class="change_pass_form">
+		<form method="POST" action="" enctype="multipart/form-data">{% csrf_token %}
+			Old password: <input type="password" name="old_password" style="padding: 6px 15px;margin-top: 2%;"><br>
+			New Password: <input type="password" id="password" name="new_password" style="padding: 6px 15px;margin-top: 2%;"><br>
+			Confrim Pass: <input type="password" name="confirm_password" style="padding: 6px 15px;margin-top: 2%;"><br>
+			<input type="checkbox" onchange="showpass()" >show password<br>
+			<input type="submit" value="Update" name="update">
+		</form>
+		</div>
+	</div>
+{% endblock%}
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <form action="" method="post">
+  {% csrf_token %}
+  {% if form.email.errors %}
+    {{ form.email.errors }}
+  {% endif %}
+      <p>{{ form.email }}</p>
+    <input type="submit" class="btn btn-default btn-lg" value="Reset password">
+  </form>
+{% endblock %}

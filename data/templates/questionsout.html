@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Questions</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% load static %}
+	<link rel="stylesheet" href="{%static 'css/style.css'%}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+
+</style>
+<script>
+function showdescription(id, btn)
+{
+	var x = document.getElementById(id);
+	var y = document.getElementById(btn);
+	if(x.style.display == "none")
+	{ x.style.display = "block";y.style.transform='rotate(-180)';}else {x.style.display = "none";}
+}
+</script>
+<body>
+{% block content %}
+{% endblock %}
+	<div id="myDIV">
+	  <a href="{% url 'index_out' %}"><button class="menu_btn active">Home</button></a>
+	  <a href="/admin/"><button class="menu_btn">Admin</button></a>
+	  <div id="menu_div">
+	  <div>
+	  <form action="{% url 'questions_out'%}" >
+	  <input type="text" placeholder="Search" name="search" id="myinput">
+	  </form>
+	  </div>
+	  <a href=""><button class="menu_btn">Settings</button></a>
+	  <a href="{% url 'loginform'%}"><button class="menu_btn" id="out">Login</button></a>
+	  </div>
+	  
+	</div>
+	<div class="container_fluid">
+		<div class="row">
+			<div class="col-sm-10">
+			<div>
+				<div class="new_question">
+				<button type="submit" >ASK</button>
+			    <br>
+				</div>
+			</div>
+			</div>
+			<div>
+			{% for question in question_list %}
+				<div class="question_container" >
+				<div style="margin-top: 2%;margin-bottom: 2%;">{{ question.question }}
+				<button style="float: right;transform: rotate(90deg);margin-right: 1%;width: 20px;border: none;border-radius: 5px;" onclick="showdescription({{question.id}}, this)">></button>
+				</div>					
+				<div style="border: 2px 5px;text-align: justify;margin-left: 2.5%;display: none;margin-top: 2%;margin-bottom: 2%;" id="{{question.id}}">
+					{{ question.more_description }}
+					<a href="{{ question.get_another_url }}">{{ question.get_another_url }}</a>
+				</div>
+				
+				</div>
+				{% empty %}
+				<div style="margin-top: 15%;">
+					<center><br><p>No Questions Found</p>
+					<a href="{%  url 'questions_out' %}">BACK</a>
+					</center>
+				</div>
+			{% endfor %}
+			</div>
+		</div>
+	</div>
+</body>
+</html>

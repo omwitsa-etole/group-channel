@@ -1,0 +1,17 @@
+{% extends "images.html" %}
+
+{% block content %}
+	<div class="image_detail_container">
+		<div class="image_content">
+		<div><button onclick="history.back()" style="float: right;color: red;">&times</button></div>
+		<h4>Title: {{ query.title }}</h4><br>
+		<p> {{ query.date_created }}<p><br>
+		<div class="actual_image">
+			<img src="{{ MEDIA_URL }}{{ query.picture }}">
+		</div>
+		<div class="actual_content">
+			{{ query.description }}
+		</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "settings.html" %}
+
+{% block cont %}
+	<div class="personal_dat">
+		<h1>PERSONAL DETAILS</h1>
+		<p><strong>Name:</strong> <a href="">{{ user.name }}</a></p> 
+		<p><strong>Username:</strong> {{ user.username }}</p>
+		<p><strong>Email:</strong> {{ user.email }}</p>
+		<p><strong>Phone:</strong> {{ user.phone }}</p>
+		<p><strong>Gender:</strong> {{ user.gender }}</p>
+	</div>
+
+{% endblock %}

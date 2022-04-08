@@ -1,0 +1,67 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+  <h1>Title: {{ query.title }}</h1>
+  <div style="margin-left:20px;margin-top:20px">
+	<div style="margin-left: 0%;">
+	<video width="75%" height="30%" controls> <source src="{{ MEDIA_URL }}{{ query.upload }}" type="video/mp4"></video>
+	</div>
+	<div class="vid_btn_all">
+		<div class="vid_btn_one">
+		<button class="fa fa-thumbs-up"></button >
+		<button href="" class="fa fa-thumbs-down"></button>
+		<button href="" class="fa fa-share"></button>
+		<a href="{{ MEDIA_URL }}{{ query.upload }}" download="{{ query.title }}.mp4"><button href="" class="fa fa-save"></button ></a>
+		</div>
+	</div>
+	<div class="time">
+		Date: {{ query.date_created }}
+	<div>
+	<hr/>
+	<div style="position: absolute;right: 0;top: 22%; width: 25%;height: 100%;">
+		<table width="100%" height="50%" border="1px" style="border-collapse: collapse;overflow: auto;">
+			<tr><th style="height: 10%;">Next in Qeue</th><tr>
+			<tr><td>
+			</td></tr>
+		</table>
+	</div>
+   </div>
+   <div>
+  <p><strong>Description:</strong> {{ query.description }}</p><br>
+  </div>
+  {% if new_comment %}
+  <div class="comment_alert" role="alert">
+	success
+  </div>
+  {% else %}
+  <div class="comment">
+  <h4>Leave a comment:<h4>
+	<form method='POST' action="">
+	{{ comment_form.as_p }}
+	{% csrf_token %}
+	<input type="submit" value="post" style="padding: 10px 20px;position: relative;z-index: 1;margin-top: -7.5%;margin-right: 5%;float: right;">
+	</form><br>
+  </div>
+  {% endif %}
+  <div>{{ comments.count }} Comments</div><br>
+  <div class="comments_all">
+  <div>
+	{% for comment in comments %}
+		<div class="comments">
+			<div>
+			{{ comment.name }}
+			{{ comment.created_on }}
+			</div><br>
+			<div>
+			{{ comment.commenting | linebreaks }}
+			</div>
+			<div class="comm_btn">
+			<button class="fa fa-thumbs-up"></button >
+			<button href="" class="fa fa-thumbs-down"></button>
+			<button href="" class="fa fa-share"></button>
+			</div>
+		</div>
+	{% endfor %}
+  </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base2.html" %}
+<div>
+	{% block content %}
+		<div class="settings_nav">
+			<div class="set_nav_cont">
+			<a href="{% url 'details' %}">Edit details</a>
+			<a href="">Channels</a>
+			<a href="{% url 'pass_set' %}">Change Password</a>
+			</div>
+		</div>
+		<div class="set_cont">
+			{% block cont %}
+			{% endblock %}
+		</div>
+	{% endblock %}
+</div>

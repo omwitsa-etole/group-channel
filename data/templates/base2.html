@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	{% block title %}<title></title>{% endblock %}
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% load static %}
+	<link rel="stylesheet" href="{%static 'css/style.css'%}">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+</style>
+{% load static %}
+<script src="{%static 'js/script.js'%}"></script>
+<script src="{%static 'js/script.js'%}"></script>
+
+<script>
+var Webflow = Webflow || [];
+Webflow.push(function() {
+	var figure = $(".video").hover(function() {
+		$('video', this).get(0).play();
+	}, function() {
+		$('video', this).get(0).pause();
+	}).each(function() {
+		$('video', this).get(0).pause();
+	});
+});
+function showmenu(id)
+{ 
+	var menu = document.getElementById(id);    
+	if (menu.style.display == "none"){ 
+		menu.style.display = 'block'; 
+	}else{   
+		menu.style.display = 'none'; 
+	} 
+}
+</script>
+<body>
+	<div id="myDIV">
+	  <a href="/video/in/"><button class="menu_btn">Home</button></a>
+	  <a href="/admin/"><button class="menu_btn">Admin</button></a>
+	  <div class="dropdown">
+	  <a class="menu_btn">+Upload</a>
+	  <div class="dropdown_content">
+	  <a href="{% url 'upload_video' %}">Video</a>
+	  <a href="{% url 'upload_image' %}">Image</a>
+	  </div>
+	  </div>
+	  <div id="menu_div">
+	  <div>
+	  <form action="{% url 'index'%}" >
+	  <input type="text" placeholder="Search" name="search" id="myinput">
+	  </form>
+	  </div>
+	  <a href="{% url 'my_settings' %}"><button class="menu_btn">Settings</button></a>
+	  <a href="/video/logout/"><button class="menu_btn" id="out">Logout</button></a>
+	  </div>
+	  
+	</div>
+	<div class="container_fluid">
+		<div class="row">
+			<div class="col-sm-10">
+			<div>
+			you are <strong>{{ username }}</strong>
+			</div>
+			<div>
+			{% block content %}
+			{% endblock %}
+			</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
