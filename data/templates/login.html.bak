@@ -6,7 +6,7 @@
          
          <div style = "min-width: 40%;">
             <center> {{ MyLoginForm.username.label_tag }}
-               <input type = "text" style = "margin-left:;" 
+               <input type = "text" style = "margin-left:;padding: 9px;" 
                   placeholder = "Identifiant" name = "username" value="{{ MyLoginForm.username.value|default:"" }}"/>
             </center>
 			{% if MyLoginForm.username.errors %}
@@ -18,7 +18,7 @@
   
          <div style = "min-width: 40%;">
             <center>{{ MyLoginForm.password.label_tag }}
-               <input type = "password" style = "margin-left:;" 
+               <input type = "password" style = "margin-left:;padding: 9px;" 
                   placeholder = "password" name = "password" value="{{ MyLoginForm.password.value|default:"" }}" />
             </center>
 			{% if MyLoginForm.password.errors %}
@@ -41,7 +41,7 @@
          </div>
          
       </form>
-      <a href="/video/out/" style="margin-left: 5%;"><button style="padding: 5px 8px;">Offline</button></a>
+      <a href="/video/out/" style="margin-left:;"><button style="padding: 5px 8px;">Offline</button></a>
   </center>
   </body>
 </html>

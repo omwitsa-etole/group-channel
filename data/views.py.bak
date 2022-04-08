@@ -108,7 +108,7 @@ def UploadView(request):
     else:
         return render(request, 'login.html', {})
         
-    return render(request, 'upload.html', locals())
+    return render(request, 'upload2.html', locals())
     
 class VideoDetailOutView(generic.DetailView):
     model = Video
