@@ -1,5 +1,6 @@
 <html>
    <body>
+	<center>
 	  {{ error }}
       <form name = "form" action = "{% url 'login' %}"  method = "POST" >{% csrf_token %}
          
@@ -40,6 +41,7 @@
          </div>
          
       </form>
-      <a href="/video/out/" style="margin-left: 20%;"><button style="padding: 5px 8px;">Offline</button></a>
-   </body>
+      <a href="/video/out/" style="margin-left: 5%;"><button style="padding: 5px 8px;">Offline</button></a>
+  </center>
+  </body>
 </html>
