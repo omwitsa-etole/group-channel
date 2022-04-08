@@ -242,6 +242,7 @@ ul {
 .home_nav_cont a{
 	text-align: center;
 	display: block;
+	text-align: justify;
 	margin-top: 10%;
 	width: 90%;
 	height: 7%;
