@@ -3,7 +3,6 @@
 	<title>HOME|UPLOAD</title>
 {% endblock %}
 {% block content %}
-{% block content %}
 <div class="alert_success">
 {% if new_video %}
 	<div class="alert_content">
@@ -13,8 +12,9 @@
 </div>
 <form name = "form" enctype = "multipart/form-data" action = "" method = "POST" >{% csrf_token %}
 <div class="upload-video">
-	{{ MyVideoForm.as_p }}
 	{% csrf_token %}
+		{% render_form serializer %}
+	
 	<br>
 	<input type="submit" value="Upload" style="float:right;margin-right: 20%;padding: 9px;background: blue;border: none;">
 </div>   

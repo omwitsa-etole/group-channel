@@ -9,7 +9,11 @@ from django.db.models import Q
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.contrib import messages
-
+from rest_framework import viewsets, parsers
+from .serializers import ImageSerializer, VideoSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.renderers import TemplateHTMLRenderer
 
 def log_in(request):
     error = '';
@@ -97,22 +101,7 @@ def IndexView(request):
         video_list = Video.objects.all().order_by("-date_created")
     return render(request, 'index.html', {"username" : username, "video_list": video_list})
 
-def UploadView(request):
-    if request.session.has_key('username'):
-        username = request.session['username']
-        new_video = None
-        if request.method == "POST":
-            MyVideoForm = VideoForm(request.POST, request.FILES) 
-            if MyVideoForm.is_valid():
-                MyVideoForm.save()
-                new_video = "saved"
-            else:
-                MyVideoForm = VideoForm()
-    else:
-        return render(request, 'login.html', {})
-        
-    return render(request, 'upload.html', locals())
-    
+
 class VideoDetailOutView(generic.DetailView):
     model = Video
     context_object_name = 'query'
@@ -160,25 +149,47 @@ def ImageDetailView(request, pk):
         
     return render(request, template_name, locals())
     
-   
-def SaveImage(request):
-    if request.session.has_key('username'):
-        username = request.session['username']
-        saved = False
-        new_image = None
-        if request.method == "POST":
-            MyImageForm = ImageForm(request.POST, request.FILES) 
-            if MyImageForm.is_valid():
-                new_image = MyImageForm.save(commit=False)
-                new_image.save()
-                saved = True
-            else:
-                MyImageForm = ImageForm()
-    else:
-        return render(request, 'login.html', {})
+
+class ImageViewset(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'upload2.html'
+    
+    def get(self, request, pk):
+        user = get_object_or_404(User, pk=pk)
+        serializer = ImageSerializer()
+        error = ''
+        return Response({'serializer':serializer,'error':error})
         
-    return render(request, 'upload2.html', locals())
-  
+    def post(self, request, pk):
+        user = get_object_or_404(User, pk=pk)
+        serializer = ImageSerializer(data=request.data)
+        if not serializer.is_valid():
+            error = 'upload failed'
+            return Response({'serializer':serializer,'error':error})   
+        serializer.save()
+        error = 'upload success'
+        return Response({'serializer':serializer,'error':error})
+ 
+class VideoViewset(APIView):
+    renderer_classes = [TemplateHTMLRenderer]
+    template_name = 'upload.html'
+    
+    def get(self, request, pk):
+        video = get_object_or_404(User, pk=pk)
+        serializer = VideoSerializer()
+        error = ''
+        return Response({'serializer':serializer,'error':error})
+        
+    def post(self, request, pk):
+        video = get_object_or_404(User, pk=pk)
+        serializer = VideoSerializer(data=request.data)
+        if not serializer.is_valid():
+            error = 'upload failed'
+            return Response({'serializer':serializer,'error':error})   
+        serializer.save()
+        error = 'upload success'
+        return Response({'serializer':serializer,'error':error})
+     
 def Settings(request):
     if request.session.has_key('username'):
          username = request.session['username']

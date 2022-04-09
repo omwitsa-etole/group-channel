@@ -9,7 +9,6 @@ class Video(models.Model):
     upload = models.FileField(upload_to = 'videos/')
     title=models.CharField(max_length=100, null=False, blank=False)
     description=models.TextField(help_text="Video Description", null=True, blank=True)
-    category=models.CharField(max_length=100, help_text="Enter Video Category", null=True, blank=False)
     date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     
     def _str_(self):
@@ -33,7 +32,9 @@ class User(AbstractUser):
   
     
     def get_absolute_url(self):
-        return reverse('user_detail', args=[str(self.id)])
+        return reverse('upload_video', args=[str(self.id)])
+    def get_another_url(self):
+        return reverse('upload_image', args=[str(self.id)])
         
     def _str_(self):
         return self.username

@@ -1,14 +1,12 @@
 {% extends "settings.html" %}
 
 {% block cont %}
-	{% if user.is_authenticated %}
 	<div class="personal_dat">
 		<h1>PERSONAL DETAILS</h1>
 		<p><strong>Name:</strong> <a href=""></a></p> 
-		<p><strong>Username:</strong> {{ user.username }}</p>
+		<p><strong>Username:</strong> {{ user.self }}</p>
 		<p><strong>Email:</strong> {{ user.email }}</p>
 		<p><strong>Phone:</strong> </p>
 		<p><strong>Gender:</strong> </p>
 	</div>
-	{% endif %}
 {% endblock %}

@@ -2,6 +2,13 @@ from django.urls import path, reverse_lazy
 from django.views.generic import TemplateView
 from .import views
 from django.contrib.auth import views as auth_views
+from data.views import ImageViewset, VideoViewset
+from rest_framework.routers import DefaultRouter
+
+router = DefaultRouter()
+#router.register(r'in/upload/image', ImageViewset, basename='user')
+#router.register(r'in/upload/video', VideoViewset, basename='user')
+urlpatterns = router.urls
 
 urlpatterns = [
     path('out/videos/', views.IndexView,name='index_out'),
@@ -33,8 +40,8 @@ urlpatterns = [
     path('in/settings/password/', views.PassView, name="pass_set"),
     path('in/settings/details/', views.DetailView, name="details"),
     path('logout/', views.logout, name='logout'),
-    path('in/upload/video/', views.UploadView, name="upload_video"),
-    path('in/upload/image/', views.SaveImage, name="upload_image"),
+    path('in/upload/video/<int:pk>', views.VideoViewset.as_view(), name="upload_video"),
+    path('in/upload/image/<int:pk>', views.ImageViewset.as_view(), name="upload_image"),
     path('channels/<int:id>/', views.ChannelDetailView.as_view(), name='channel_detail'),
    # path('user/<int:pk>', views.UserDetailView.as_view(), name='user-detail'),
-]
+]+ router.urls

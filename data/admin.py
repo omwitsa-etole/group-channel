@@ -7,7 +7,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'email')
 @admin.register(Video)
 class VideoAdmin(admin.ModelAdmin):   
-    list_display=('title', 'description', 'category', 'upload')
+    list_display=('title', 'description', 'upload')
     actions = ['approve_videos']
     
 @admin.register(Image)

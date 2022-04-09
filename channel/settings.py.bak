@@ -40,6 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'data.apps.DataConfig',
+    's3direct',
+    'storages',
+    'rest_framework',
+    'boto3',
     
 ]
 
@@ -129,7 +133,22 @@ STATIC_ROOT = BASE_DIR / "static"
 MEDIA_URL = 'data/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "data/media")
 
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+AWS_SECRET_ACCESS_KEY = 'ghsned3v3DJi8xG7FnXf3M7Km3vPvlSn/FG1nIQE'
+AWS_ACCESS_KEY_ID = 'AKIA2ZK3446CLRTFIMDJ'
+AWS_STORAGE_BUCKET_NAME = 'group-channel'
+AWS_S3_REGION_NAME = 'us-east-1'
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+AWS_S3_VERIFY = True
+
+S3DIRECT_DESTINATIONS = {
+    'primary_destination': {
+        'key': 'uploads/',
+        'allowed': ['image/jpg', 'image/jpeg', 'image/png', 'video/mp4'],
+    },
+}
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
