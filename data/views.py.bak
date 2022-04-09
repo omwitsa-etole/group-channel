@@ -104,7 +104,7 @@ def UploadView(request):
         username = request.session['username']
         new_video = None
         if request.method == "POST":
-            y2mate.com - Aluta Official Video  Ochungulo Family X Exray X Gwaash_360p = VideoForm(request.POST, request.FILES) 
+            MyVideoForm = VideoForm(request.POST, request.FILES) 
             if MyVideoForm.is_valid():
                 MyVideoForm.save()
                 new_video = "saved"
