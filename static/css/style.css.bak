@@ -199,6 +199,8 @@ ul {
 }
 .set_nav_cont {
 	text-align: center;
+	height: 50%;
+	width: 100%;
 }
 .set_nav_cont a{
 	display: block;
@@ -307,13 +309,21 @@ ul {
 }
 .alert_content {
 }
+.image_ls a{
+	display: inline;
+	margin-left: 2%;
+}
+.image_container {
+	width: 70%;
+	height: 100%;
+}
 .image_detail_container {
 	position: relative;
 	z-index: 2;
 	border: 5px 6px;
 	margin: 5% auto;
 	width: 55%;
-	height: 500px;
+	height: 50%;
 	background: white;
 	border-radius: 10px;
 }
