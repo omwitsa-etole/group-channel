@@ -12,7 +12,7 @@
 				<a href="">Add to Qeue</a>
 				<a href="{{ MEDIA_URL }}{{ video.upload }}" download="{{ query.title }}.mp4">Save for later</i></a>
 				<a href='{{ video.get_absolute_url }}' target="_blank">Open Video in new tab</a>
-				<a href=""><i>Copy Video Url</i></a>
+				<a href="" onclick="copy(video.get_absolute_url)"><i>Copy Video Url</i></a>
 				</div>
 				</div>
 				<table>
