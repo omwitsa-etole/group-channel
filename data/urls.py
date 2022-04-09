@@ -29,5 +29,5 @@ urlpatterns = [
     path('in/upload/video/', views.UploadView, name="upload_video"),
     path('in/upload/image/', views.SaveImage, name="upload_image"),
     path('channels/<int:id>/', views.ChannelDetailView.as_view(), name='channel_detail'),
-   # path('user/<int:pk>', views.UserDetailView.as_view(), name='user-detail'),
+    path('user/<int:pk>', views.UserDetailView.as_view(), name='user-detail'),
 ]

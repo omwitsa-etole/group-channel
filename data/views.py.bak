@@ -77,7 +77,7 @@ class SignUpView(View):
 
             return redirect(to='login')
 
-        return render(request, self.template_name, {'form': form})
+    return render(request, self.template_name, {'form': form})
   
 class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
     template_name = 'password_reset.html'

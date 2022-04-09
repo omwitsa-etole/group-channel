@@ -28,10 +28,11 @@ class User(models.Model):
     username = models.CharField(max_length=50,null=False, blank=False,default="")
     email = models.CharField(max_length=50, default="")
     password = models.CharField(max_length = 100, default="", null=False, blank=False)
+    USERNAME_FIELD = 'username'
   
     
     def get_absolute_url(self):
-        return reverse('upload_detail', args=[str(self.id)])
+        return reverse('user_detail', args=[str(self.id)])
         
     def _str_(self):
         return self.username
