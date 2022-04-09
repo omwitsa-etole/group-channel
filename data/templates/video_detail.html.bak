@@ -3,9 +3,9 @@
 {% block content %}
   <h1>Title: {{ query.title }}</h1>
   {% load static %}
-  <div style="margin-left:20px;margin-top:20px">
+  <div style="margin-left:10px;margin-top:20px">
 	<div style="margin-left: 0%;">
-	<video width="75%" height="30%" controls> <source src="{% static query.upload %}" type="video/mp4"></video>
+	<video width="70%" height="30%" controls> <source src="{{ MEDIA_URL }}{{ query.upload }}" type="video/mp4"></video>
 	</div>
 	<div class="vid_btn_all">
 		<div class="vid_btn_one">
@@ -19,8 +19,9 @@
 		Date: {{ query.date_created }}
 	<div>
 	<hr/>
-	<div style="position: absolute;right: 0;top: 22%; width: 25%;height: 100%;">
-		<table width="100%" height="50%" border="1px" style="border-collapse: collapse;overflow: auto;">
+	<div style="position: absolute;right: 0;top: 22%; width: 29%;height: 400px;">
+		<div style="height: 100%;overflow: auto;">
+		<table width="100%" height="50%" border="1px" style="border-collapse: collapse;">
 			<tr><th style="height: 10%;">Next in Qeue</th><tr>
 			{% for video in video_list %}
 			<tr><td onclick="window.location='{{ video.get_absolute_url }}'">
@@ -35,6 +36,7 @@
 			</td></tr>
 			{% endfor %}
 		</table>
+		</div>
 	</div>
    </div>
    <div>

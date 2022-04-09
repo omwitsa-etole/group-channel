@@ -5,14 +5,15 @@
 	{% block content %}
 		<div>
 			{% for video in video_list %}
+				{% load static %}
 				<div class="video_container">
 				<p id="dropbtn" onclick="showmenu({{ video.id }})" style="float: right;">...</p>
 				<div class="context-menu" id="context-menu">
 				<div class="menu" id="{{ video.id }}">
 				<a href="">Add to Qeue</a>
-				<a href="{{ MEDIA_URL }}{{ video.upload }}" download="{{ query.title }}.mp4">Save for later</i></a>
+				<a href="{% static video.upload %}" download="{{ query.title }}.mp4">Save for later</i></a>
 				<a href='{{ video.get_absolute_url }}' target="_blank">Open Video in new tab</a>
-				<a href=""><i>Copy Video Url</i></a>
+				<a href="" onclick="copy(video.get_absolute_url)"><i>Copy Video Url</i></a>
 				</div>
 				</div>
 				<table>

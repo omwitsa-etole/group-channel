@@ -126,23 +126,28 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-AWS_SECRET_ACCESS_KEY = 'I3R2C3K7PrGucjETQLaYbnILY6gODQRTCPq7GmO4'
-AWS_ACCESS_KEY_ID = 'AKIA2ZK3446CIVWNXY55 '
-AWS_STORAGE_BUCKET_NAME = 'group-channel'
 AWS_S3_REGION_NAME = 'us-east-1'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
-AWS_S3_VERIFY = True
+
+#STATIC_ROOT = BASE_DIR, 'static'
+#STATIC_URL = 'static/'
+#MEDIA_ROOT = BASE_DIR, 'media/'
+#MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+AWS_ACCESS_KEY_ID = 'AKIA2ZK3446CIVWNXY55'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'group-channel'
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
+AWS_LOCATION = 'static'
 
-STATIC_ROOT = BASE_DIR, 'static'
-STATIC_URL = 'static/'
-MEDIA_ROOT = BASE_DIR, 'media/'
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'data/static'),
+]
+STATIC_URL = f'https://%s/%s/' % (AWS_S3_CUSTOM_DOMAIN, AWS_LOCATION)
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 S3DIRECT_DESTINATIONS = {
     'primary_destination': {

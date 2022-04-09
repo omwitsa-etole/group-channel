@@ -310,6 +310,7 @@ ul {
 .alert_content {
 }
 .image_ls a{
+	position: relative;
 	display: inline;
 	margin-left: 2%;
 }

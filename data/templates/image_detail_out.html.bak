@@ -7,7 +7,7 @@
 		<h4>Title: {{ query.title }}</h4><br>
 		<p> {{ query.date_created }}<p><br>
 		<div class="actual_image">
-			<img src="{% static query.picture %}">
+			<img src="{{ MEDIA_URL }}{{ query.picture }}">
 		</div>
 		<div class="actual_content">
 			{{ query.description }}

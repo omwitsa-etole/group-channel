@@ -3,11 +3,11 @@
 		<title>HOME|IMAGES</title>
 	{% endblock %}
 	{% block content %}
+	{% load static %}
 	<div class="image_container">
 		{% for image in image_list %}
 			<div class="image_ls">
-			{% load static %}
-				<a href="{{ image.get_absolute_url }}"><img class="img" src="{{ image.picture }}" type="image"></a>
+				<a href="{{ image.get_absolute_url }}"><img class="img" src="{% static STATIC_URL %}{{ image.picture}}" type="image"></a>
 			</div>
 			<div class="title" style="display:none;position: absolute;">{{ image.title }}</div>
 		{% empty %}
