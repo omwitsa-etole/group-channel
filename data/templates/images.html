@@ -7,7 +7,7 @@
 		{% for image in image_list %}
 			<div class="image_ls">
 				{% load static %}
-				<a href="{{ image.get_absolute_url }}"><img class="img" src="{{ MEDIA_URL }}{% static image.picture %}" type="image"></a>
+				<a href="{{ image.get_absolute_url }}"><img class="img" src="{{ MEDIA_URL }}{{ image.picture }}" type="image"></a>
 			</div>
 			<div class="title" style="display:none;position: absolute;">{{ image.title }}</div>
 		{% empty %}
