@@ -75,7 +75,7 @@ class SignUpView(View):
             form.save()
             messages.success(request, f'Account created for {username}')
 
-            return redirect(to='/login/')
+            return redirect(to='login')
 
         return render(request, self.template_name, {'form': form})
   
