@@ -72,7 +72,6 @@ class SignUpView(View):
 
         if form.is_valid():
             form.save()
-
             username = form.cleaned_data.get('username')
             messages.success(request, f'Account created for {username}')
 
@@ -115,7 +114,6 @@ def UploadView(request):
             MyVideoForm = VideoForm(request.POST, request.FILES) 
             if MyVideoForm.is_valid():
                 new_video = MyVideoForm.save(commit=False)
-                new_video.user = request.user
                 new_video.save()
                 saved = True
             else:
@@ -147,7 +145,7 @@ def VideoDetailView(request, pk):
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.user = request.user
+            new_comment.query = request.query
             new_comment.save()
     else:
         comment_form = CommentForm()
@@ -165,8 +163,7 @@ def ImageDetailView(request, pk):
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.user = request.user
-            new_comment.video = request.video
+            new_comment.query = request.query
             new_comment.save()
     else:
         comment_form = CommentForm()
@@ -183,7 +180,6 @@ def SaveImage(request):
             MyImageForm = ImageForm(request.POST, request.FILES) 
             if MyImageForm.is_valid():
                 new_image = MyImageForm.save(commit=False)
-                new_image.user = request.user
                 new_image.save()
                 saved = True
             else:
@@ -251,7 +247,6 @@ def QuestionView(request):
         MyQuestionForm = QuestionForm(request.POST, request.FILES) 
         if MyQuestionForm.is_valid():
             new_question=MyQuestionForm.save(commit=False)
-            new_question.user = request.user
             new_question.save()
             saved = True
         else:
@@ -283,7 +278,7 @@ def QuestionDetailView(request, pk):
         answer_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_answer = comment_form.save(commit=False)
-            new_answer.question = question
+            new_answer.question = request.question
             new_answer.save()
     else:
         answer_form = CommentForm()
