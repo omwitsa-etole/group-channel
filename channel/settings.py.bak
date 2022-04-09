@@ -26,7 +26,7 @@ SECRET_KEY =  os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = False
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = os.environ.get("DEBUG", "False") == "False"
 
 ALLOWED_HOSTS = ['online-channel.herokuapp.com', 'group-channel.herokuapp.com', '127.0.0.1', '192.168.43.197']
 
@@ -124,10 +124,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = BASE_DIR / "static"
 
-MEDIA_URL = 'media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+MEDIA_URL = 'data/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "data/media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
