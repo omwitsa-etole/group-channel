@@ -78,7 +78,7 @@ class SignUpView(View):
         return render(request, self.template_name, {'form': form})
     
 def SaveVideo(request):
-    
+
     
     if saved == True:
         return HttpResponse("<strong>File Uploaded Succesfully.</strong><br><a href='/video/in/upload/'>back</a>")
@@ -102,14 +102,12 @@ def IndexView(request):
 def UploadView(request):
     if request.session.has_key('username'):
         username = request.session['username']
-        saved = False
         new_video = None
         if request.method == "POST":
             MyVideoForm = VideoForm(request.POST, request.FILES) 
             if MyVideoForm.is_valid():
-                new_video = MyVideoForm.save(commit=False)
-                new_video.save()
-                saved = True
+                MyVideoForm.save()
+                new_video = "saved"
             else:
                 MyVideoForm = VideoForm()
     else:

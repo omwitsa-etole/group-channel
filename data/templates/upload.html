@@ -10,7 +10,7 @@
 	</div>
 {% endif%}
 </div>
-<form name = "form" enctype = "multipart/form-data" action = "" method = "POST" >{% csrf_token %}
+<form name = "form" enctype = "multipart/form-data" method = "POST" >{% csrf_token %}
 <div class="upload-video">
 	{{ MyVideoForm.as_p }}
 	{% csrf_token %}
