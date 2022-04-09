@@ -9,6 +9,8 @@ from django.db.models import Q
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 def log_in(request):
@@ -77,6 +79,10 @@ class SignUpView(View):
             return redirect(to='/login/')
 
         return render(request, self.template_name, {'form': form})
+  
+class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
+    template_name = 'password_reset.html'
+    email_template_name = 'password_reset_done.html'
     
 def SaveVideo(request):
     
@@ -109,6 +115,7 @@ def UploadView(request):
             MyVideoForm = VideoForm(request.POST, request.FILES) 
             if MyVideoForm.is_valid():
                 new_video = MyVideoForm.save(commit=False)
+                new_video.user = request.user
                 new_video.save()
                 saved = True
             else:
@@ -140,7 +147,7 @@ def VideoDetailView(request, pk):
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.query = query
+            new_comment.user = request.user
             new_comment.save()
     else:
         comment_form = CommentForm()
@@ -158,7 +165,8 @@ def ImageDetailView(request, pk):
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.query = query
+            new_comment.user = request.user
+            new_comment.video = request.video
             new_comment.save()
     else:
         comment_form = CommentForm()
@@ -175,6 +183,7 @@ def SaveImage(request):
             MyImageForm = ImageForm(request.POST, request.FILES) 
             if MyImageForm.is_valid():
                 new_image = MyImageForm.save(commit=False)
+                new_image.user = request.user
                 new_image.save()
                 saved = True
             else:
@@ -242,6 +251,7 @@ def QuestionView(request):
         MyQuestionForm = QuestionForm(request.POST, request.FILES) 
         if MyQuestionForm.is_valid():
             new_question=MyQuestionForm.save(commit=False)
+            new_question.user = request.user
             new_question.save()
             saved = True
         else:
@@ -273,7 +283,7 @@ def QuestionDetailView(request, pk):
         answer_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_answer = comment_form.save(commit=False)
-            new_answer.question = question
+            new_answer.question = request.question
             new_answer.save()
     else:
         answer_form = CommentForm()

@@ -26,7 +26,7 @@ SECRET_KEY =  os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = False
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = os.environ.get("DEBUG", "False") == "False"
 
 ALLOWED_HOSTS = ['online-channel.herokuapp.com', 'group-channel.herokuapp.com', '127.0.0.1']
 
@@ -143,4 +143,11 @@ MEDIA="/media/"
 
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'omwitsabradone@gmail.com'
+EMAIL_HOST_PASSWORD = 'lovingson@23'
 

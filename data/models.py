@@ -52,7 +52,9 @@ class Question(models.Model):
         return reverse('questions_url_out', args=[str(self.id)])
 
 class Comment(models.Model):
-    video = models.ForeignKey('Video',on_delete=models.CASCADE,related_name='comments', null=True, blank=True)
+    user = models.ForeignKey('User', default='User', null=True, on_delete=models.SET_NULL)
+    video = models.ForeignKey(Video,on_delete=models.CASCADE,related_name='comments', null=True, blank=True)
+    question = models.ForeignKey(Question, default="admin", null=True, on_delete=models.SET_NULL)
     commenting = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
@@ -74,8 +76,10 @@ class Image(models.Model):
         db_table = "image"
    
 class Channel(models.Model):
+    user = models.ForeignKey('User', default='User', null=True, on_delete=models.SET_NULL)
+    avatar = models.FileField(default=1, upload_to='profile_images')
     def _str_(self):
-        return self.channel_name
+        return self.channel.username
         
     def get_absolute_url(self):
         return reverse('channel-detail', args=[str(self.id)])
