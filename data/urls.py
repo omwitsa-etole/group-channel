@@ -1,6 +1,7 @@
-from django.urls import path 
+from django.urls import path, reverse_lazy
 from django.views.generic import TemplateView
 from .import views
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('out/videos/', views.IndexView,name='index_out'),
@@ -12,9 +13,15 @@ urlpatterns = [
     path('in/questions/', views.QuestionView, name='questions_in'),
     path('in/questions/<int:pk>/', views.QuestionDetailView, name='questions_url_in'),
     path('out/questions/<int:pk>/', views.QuestionDetailOutView.as_view(), name='questions_url_out'),
-    path('in/forgetpass/', views.ResetPasswordView.as_view(),name='forgot_pass'),
-    path('password-reset-confirm/<uidb64>/<token>/', TemplateView.as_view(template_name='password_reset_confirm.html'),name='password_reset_confirm'),
-    path('password-reset-complete/', TemplateView.as_view(template_name='password_reset_complete.html'),name='password_reset_complete'),
+    path('in/forgetpass/',auth_views.PasswordResetView.as_view(
+             template_name='password_reset.html',
+             subject_template_name='password_reset_subject.txt',
+             email_template_name='password_reset_email.html',
+              success_url=reverse_lazy('login')
+         ),name='forgot_pass'),
+    path('password-reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='password_reset_done.html'),name='password_reset_done'),
+    path('password-reset-confirm/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(template_name='password_reset_confirm.html'),name='password_reset_confirm'),
+    path('password-reset-complete/', auth_views.PasswordResetCompleteView.as_view(template_name='password_reset_complete.html'),name='password_reset_complete'),
     path('in/images/', views.ImageView,name='image_view'),
     path('in/images/<int:pk>/', views.ImageDetailView,name='image_detail'),
     path('in/', views.formView, name='loginform'),
@@ -29,5 +36,5 @@ urlpatterns = [
     path('in/upload/video/', views.UploadView, name="upload_video"),
     path('in/upload/image/', views.SaveImage, name="upload_image"),
     path('channels/<int:id>/', views.ChannelDetailView.as_view(), name='channel_detail'),
-    path('user/<int:pk>', views.UserDetailView.as_view(), name='user-detail'),
+   # path('user/<int:pk>', views.UserDetailView.as_view(), name='user-detail'),
 ]

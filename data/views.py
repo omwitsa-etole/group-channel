@@ -9,8 +9,6 @@ from django.db.models import Q
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.contrib import messages
-from django.contrib.auth.views import PasswordResetView
-from django.contrib.messages.views import SuccessMessageMixin
 
 
 def log_in(request):
@@ -78,10 +76,6 @@ class SignUpView(View):
             return redirect(to='login')
 
         return render(request, self.template_name, {'form': form})
-  
-class ResetPasswordView(SuccessMessageMixin, PasswordResetView):
-    template_name = 'password_reset.html'
-    email_template_name = 'password_reset_done.html'
     
 def SaveVideo(request):
     
