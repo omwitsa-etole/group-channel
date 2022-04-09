@@ -3,6 +3,7 @@
 	<title>HOME|UPLOAD</title>
 {% endblock %}
 {% block content %}
+{% block content %}
 <div class="alert_success">
 {% if new_video %}
 	<div class="alert_content">

@@ -194,17 +194,18 @@ ul {
 .settings_nav {
 	width: 200px;
 	height: 100%;
-	background: grey;
 	border-radius: 12px;
+	box-shadow: 4px 7px #88888;
 }
 .set_nav_cont {
 	text-align: center;
+	height: 50%;
 }
 .set_nav_cont a{
 	display: block;
 	margin-top: 10%;
 	width: 90%;
-	height: 70px;
+	height: 20%;
 	border: line;
 	text-decoration: none;
 	font-size: 20px;
@@ -245,7 +246,7 @@ ul {
 	text-align: justify;
 	margin-top: 10%;
 	width: 90%;
-	height: 25%;
+	height: 7%;
 	border: line;
 	text-decoration: none;
 	font-size: 20px;

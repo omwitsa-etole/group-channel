@@ -41,7 +41,8 @@
             <center> 
 				<a href="{% url 'forgot_pass' %}" style="margin-left: ;">Forgot Password?</a><br>
 				<a href="{% url 'sign_up' %}" style="margin-left: ;">Sign Up?</a><br>
-               <button style = "border:0px; background-color:#4285F4; height:35px; width:50%;margin-left:;" type = "submit" 
+               <button style = "border:0px; background-color:#4285F4; margin-top:8%;
+                  height:35px; width:50%;margin-left:;" type = "submit" 
                   value = "Login" >
                   <strong>Login</strong>
                </button><br>
@@ -49,7 +50,7 @@
          </div>
          
       </form>
-      <a href="{% url 'index_out'%} style="margin-left:;"><button style="padding: 5px 8px;">Offline</button></a>
+      <a href="/video/out/" style="margin-left:;"><button style="padding: 5px 8px;">Offline</button></a>
   </center>
   </body>
 </html>

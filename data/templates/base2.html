@@ -34,7 +34,7 @@ function showmenu(id)
 </script>
 <body>
 	<div id="myDIV">
-	  <a href="{% url 'index'%}"><button class="menu_btn">Home</button></a>
+	  <a href="/video/in/"><button class="menu_btn">Home</button></a>
 	  <a href="/admin/"><button class="menu_btn">Admin</button></a>
 	  <div class="dropdown">
 	  <a class="menu_btn">+Upload</a>
@@ -50,7 +50,7 @@ function showmenu(id)
 	  </form>
 	  </div>
 	  <a href="{% url 'my_settings' %}"><button class="menu_btn">Settings</button></a>
-	  <a href="{%url 'logout'%}"><button class="menu_btn" id="out">Logout</button></a>
+	  <a href="/video/logout/"><button class="menu_btn" id="out">Logout</button></a>
 	  </div>
 	  
 	</div>

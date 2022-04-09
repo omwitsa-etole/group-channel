@@ -199,6 +199,8 @@ ul {
 }
 .set_nav_cont {
 	text-align: center;
+	height: 50%;
+	width: 100%;
 }
 .set_nav_cont a{
 	display: block;

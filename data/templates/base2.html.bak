@@ -16,12 +16,16 @@
 <script src="{%static 'js/script.js'%}"></script>
 
 <script>
-function copy(id)
-{
-var copyTextarea = id;
-copyTextarea.select(); 
-document.execCommand("copy"); 
-}
+var Webflow = Webflow || [];
+Webflow.push(function() {
+	var figure = $(".video").hover(function() {
+		$('video', this).get(0).play();
+	}, function() {
+		$('video', this).get(0).pause();
+	}).each(function() {
+		$('video', this).get(0).pause();
+	});
+});
 function showmenu(id)
 { 
 	var menu = document.getElementById(id);    

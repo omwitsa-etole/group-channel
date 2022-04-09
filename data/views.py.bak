@@ -78,7 +78,7 @@ class SignUpView(View):
         return render(request, self.template_name, {'form': form})
     
 def SaveVideo(request):
-
+    
     
     if saved == True:
         return HttpResponse("<strong>File Uploaded Succesfully.</strong><br><a href='/video/in/upload/'>back</a>")

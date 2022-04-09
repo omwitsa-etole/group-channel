@@ -1,15 +1,7 @@
-function copy(id)
-{
-var copyTextarea = id;
-copyTextarea.select(); 
-document.execCommand("copy"); 
+var figure = $(".video").hover( hoverVideo, hideVideo );
+function hoverVideo(e){
+	$('video', this).get(0).play();
 }
-function showmenu(id)
-{ 
-	var menu = document.getElementById(id);    
-	if (menu.style.display == "none"){ 
-		menu.style.display = 'block'; 
-	}else{   
-		menu.style.display = 'none'; 
-	} 
+function hideVideo(e){
+	$('video', this).get(0).pause();
 }
