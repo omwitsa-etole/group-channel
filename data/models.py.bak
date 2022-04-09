@@ -26,6 +26,7 @@ class Video(models.Model):
       db_table = "video"
 
 class User(AbstractUser):
+    last_login = models.DateTimeField(auto_now_add=True)
     username = models.CharField(max_length=50,null=False, blank=False,default="", unique=True)
     email = models.CharField(max_length=50, default="")
     password = models.CharField(max_length = 100, default="", null=False, blank=False)
