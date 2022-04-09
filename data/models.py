@@ -76,8 +76,9 @@ class Image(models.Model):
    
 class Channel(models.Model):
     avatar = models.FileField(default=1, upload_to='profile_images')
+    channel = models.CharField(max_length=50, null=True, blank=True)
     def _str_(self):
-        return self.channel.username
+        return self.channel
         
     def get_absolute_url(self):
         return reverse('channel-detail', args=[str(self.id)])
