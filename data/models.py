@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 import uuid
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
     
@@ -24,8 +25,8 @@ class Video(models.Model):
     class Meta:
       db_table = "video"
 
-class User(models.Model):
-    username = models.CharField(max_length=50,null=False, blank=False,default="")
+class User(AbstractUser):
+    username = models.CharField(max_length=50,null=False, blank=False,default="", unique=True)
     email = models.CharField(max_length=50, default="")
     password = models.CharField(max_length = 100, default="", null=False, blank=False)
     USERNAME_FIELD = 'username'
