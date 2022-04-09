@@ -28,4 +28,4 @@ urlpatterns = [
     path('video/', include('data.urls')),
     path('', RedirectView.as_view(url='video/out/')),
     path('video/login/', TemplateView.as_view(template_name='login.html')),
-]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

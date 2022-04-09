@@ -126,20 +126,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
-
-STATIC_ROOT = BASE_DIR / "static"
-
-MEDIA_URL = 'data/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, "data/media")
-
-AWS_SECRET_ACCESS_KEY = 'ghsned3v3DJi8xG7FnXf3M7Km3vPvlSn/FG1nIQE'
-AWS_ACCESS_KEY_ID = 'AKIA2ZK3446CLRTFIMDJ'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = 'AKIA2ZK3446CIVWNXY55 '
 AWS_STORAGE_BUCKET_NAME = 'group-channel'
 AWS_S3_REGION_NAME = 'us-east-1'
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 AWS_S3_VERIFY = True
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+
+STATIC_ROOT = BASE_DIR, 'static'
+STATIC_URL = 'static/'
+MEDIA_ROOT = BASE_DIR, 'media/'
+MEDIA_URL = f's3://{AWS_S3_CUSTOM_DOMAIN}/'
+
 
 S3DIRECT_DESTINATIONS = {
     'primary_destination': {
