@@ -127,7 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 
-USE_S3 = os.environ.get('USE_S3', 'True') == 'True'
+USE_S3 = os.environ.get('USE_S3') == 'True'
 
 if USE_S3:
     # aws settings
@@ -142,14 +142,15 @@ if USE_S3:
     DEFAULT_FILE_STORAGE = 'channel.storage_backends.StaticStorage'
     # s3 public media settings
     PUBLIC_MEDIA_LOCATION = 'media'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
     DEFAULT_FILE_STORAGE = 'channel.storage_backends.PublicMediaStorage'
 
 else:
-    STATIC_URL = 'static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_URL = 'static/' 
     MEDIA_URL = 'media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'staticfiles'),)
 
