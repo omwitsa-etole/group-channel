@@ -13,7 +13,7 @@
 	
   </style>
 {% load static %}
-<script src="{% static  'js/script.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
 <script src="{{ STATIC_URL  }}js/script.js"></script>
 <script>
 function showmenu(id)
