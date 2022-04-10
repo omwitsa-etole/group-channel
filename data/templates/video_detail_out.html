@@ -5,7 +5,7 @@
   {% load static %}
   <div style="margin-left:20px;margin-top:20px">
 	<div style="margin-left: 0%;">
-	<video width="75%" height="30%" controls> <source src="{% static query.upload %}" type="video/mp4"></video>
+	<video width="75%" height="30%" controls> <source src="{{ MEDIA_URL }}{{ query.upload }}" type="video/mp4"></video>
 	</div>
 	<div class="vid_btn_all">
 		<div class="vid_btn_one">
@@ -25,7 +25,7 @@
 			{% for video in video_list %}
 			<tr><td onclick="window.location='{{ video.get_absolute_url }}'">
 			<div class="video" style="cursor: pointer;">
-			<video width="40%" height="30%"><source src="{% static query.upload %}"></video>
+			<video width="40%" height="30%"><source src="{{ MEDIA_URL }}{{ query.upload }}"></video>
 			</div>
 			<span style="width: 60%;position: relative;float: right;margin-top: -10%;text-align: right;overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">{{ video.title }}</span>
 			</td></tr>
