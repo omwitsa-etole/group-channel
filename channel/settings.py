@@ -142,9 +142,11 @@ if USE_S3:
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
     STATICFILES_STORAGE = 'channel.storage_backends.StaticStorage'
     # s3 public media settings
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_DEFAULT_ACL = None
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'channel.storage_backends.PublicMediaStorage'
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 else:
     STATIC_URL = 'staticfiles/'
