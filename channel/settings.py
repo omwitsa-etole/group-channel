@@ -152,7 +152,7 @@ DEFAULT_FILE_STORAGE = 'channel.storage_backends.PublicMediaStorage'
     #MEDIA_URL = '/media/'
     #MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'staticfiles'),)
 
 S3DIRECT_DESTINATIONS = {
     'primary_destination': {
