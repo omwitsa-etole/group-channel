@@ -12,7 +12,7 @@ urlpatterns = router.urls
 
 urlpatterns = [
     path('out/videos/', views.IndexView,name='index_out'),
-    path('in/videos/', views.formView,name='index'),
+    path('in/videos/', views.HomeView,name='index'),
     path('out/', views.IndexView, name='video_out'),
     path('out/images/', views.ImageOutView,name='image_out_view'),
     path('out/images/<int:pk>/', views.ImageDetailOutView.as_view(),name='image_detail_out'),
