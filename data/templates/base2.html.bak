@@ -58,7 +58,7 @@ function showmenu(id)
 		<div class="row">
 			<div class="col-sm-10">
 			<div>
-			you are <strong>{{ username }}</strong>
+			you are <strong>{{ user.username }}</strong>
 			</div>
 			<div>
 			{% block content %}
