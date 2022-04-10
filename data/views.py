@@ -178,8 +178,10 @@ class ImageViewset(APIView):
         serializer = ImageSerializer(data=request.data)
         if not serializer.is_valid():
             error = 'upload failed'
+            messages.success(request, f'Image Upload failed')
             return Response({'serializer':serializer,'error':error})   
         serializer.save()
+        messages.success(request, f'Image Uploaded Successfully')
         error = 'upload success'
         return Response({'serializer':serializer,'error':error})
  
@@ -200,6 +202,7 @@ class VideoViewset(APIView):
             error = 'upload failed'
             return Response({'serializer':serializer,'error':error})   
         serializer.save()
+        messages.success(request, f'Video Uploaded Successfully')
         error = 'upload success'
         return Response({'serializer':serializer,'error':error})
      

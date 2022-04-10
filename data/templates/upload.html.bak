@@ -1,4 +1,5 @@
 {% extends "base2.html" %}
+{% load rest_framework %}
 {% block title %}
 	<title>HOME|UPLOAD</title>
 {% endblock %}

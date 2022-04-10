@@ -91,7 +91,20 @@ class UserDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     context_object_name = 'user'
     template_name = 'details.html'
-    
+def HomeView(request):
+    error = '';
+    search_query = request.GET.get('search')
+    if request.session.has_key('username'):
+        username = request.session['username']
+        if search_query:
+            video_list = Video.objects.filter(Q(title__icontains=search_query) & Q(description__icontains=search_query)).order_by("-date_created")
+        else:
+            video_list = Video.objects.all().order_by("-date_created")
+        index = 0
+    else:
+        return render(request, 'login.html', {"error_log":error})
+        
+    return render(request, 'indexhome.html', locals())
 def IndexView(request):
     username = 'not loged in'
     search_query = request.GET.get('search')
@@ -187,6 +200,7 @@ class VideoViewset(APIView):
             error = 'upload failed'
             return Response({'serializer':serializer,'error':error})   
         serializer.save()
+        messages.success(request, f'Video Uploaded Successfully')
         error = 'upload success'
         return Response({'serializer':serializer,'error':error})
      
