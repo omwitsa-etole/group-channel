@@ -2,14 +2,15 @@ from django.db import models
 from django.urls import reverse
 import uuid
 from django.contrib.auth.models import AbstractUser
+from channel import settings
 
 # Create your models here.
     
 class Video(models.Model):
-    upload = models.FileField(upload_to = 'videos/')
-    title=models.CharField(max_length=100, null=False, blank=False)
+    upload = models.FileField(upload_to = 'videos/', null=False, blank=False)
+    title = models.CharField(max_length=100, null=False, blank=False)
     description=models.TextField(help_text="Video Description", null=True, blank=True)
-    date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    date_created = models.DateTimeField(auto_now_add=True, null=True, blank=True)  
     
     def _str_(self):
         return self.title
@@ -20,9 +21,9 @@ class Video(models.Model):
     def get_another_url(self):
         return reverse('video_detail_out', args=[str(self.id)])
       
-    
     class Meta:
       db_table = "video"
+    
 
 class User(AbstractUser):
     username = models.CharField(max_length=50,null=False, blank=False,default="", unique=True)
@@ -33,6 +34,8 @@ class User(AbstractUser):
     
     def get_absolute_url(self):
         return reverse('upload_video', args=[str(self.id)])
+        return reverse('upload_policy', args=[str(self.id)])
+        return reverse('upload_complete', args=[str(self.id)])
     def get_another_url(self):
         return reverse('upload_image', args=[str(self.id)])
         

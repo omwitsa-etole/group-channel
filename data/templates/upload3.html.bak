@@ -1,0 +1,14 @@
+{% extends "base2.html" %}
+{% block content %}
+<div class='row'>
+    <div class='col-6 offset-3'>
+        <div class='item-loading-queue'>
+
+        </div>
+        <form class='cfeproj-upload-form'>
+           {% csrf_token %}
+			{% render_form serializer %}	
+        </form>
+    </div>
+</div>
+{% endblock content %}

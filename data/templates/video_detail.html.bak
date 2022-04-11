@@ -5,28 +5,30 @@
   {% load static %}
   <div style="margin-left:10px;margin-top:20px">
 	<div style="margin-left: 0%;">
-	<video width="70%" height="30%" controls> <source src="{{ MEDIA_URL }}{{ query.upload }}" type="video/mp4"></video>
+	<video width="75%" height="30%" controls> <source src="{{ MEDIA_URL }}{{ query.upload }}" type="video/mp4"></video>
 	</div>
 	<div class="vid_btn_all">
 		<div class="vid_btn_one">
 		<button class="fa fa-thumbs-up"></button >
 		<button href="" class="fa fa-thumbs-down"></button>
 		<button href="" class="fa fa-share"></button>
-		<a href="{% static query.upload %}" download="{{ query.title }}.mp4"><button href="" class="fa fa-save"></button ></a>
+		<a href="{{ MEDIA_URL }}{{ video.upload }}" download="{{ query.title }}.mp4"><button href="" class="fa fa-save"></button ></a>
 		</div>
 	</div>
 	<div class="time">
 		Date: {{ query.date_created }}
-	<div>
+	</div>
 	<hr/>
-	<div style="position: absolute;right: 0;top: 22%; width: 29%;height: 400px;">
+	
+   </div>
+   <div style="position: absolute;right: 0;top: 12%; width: 30%;height: 50%;">
 		<div style="height: 100%;overflow: auto;">
 		<table width="100%" height="50%" border="1px" style="border-collapse: collapse;">
 			<tr><th style="height: 10%;">Next in Qeue</th><tr>
 			{% for video in video_list %}
 			<tr><td onclick="window.location='{{ video.get_absolute_url }}'">
 			<div class="video" style="cursor: pointer;">
-			<video width="40%" height="30%"><source src="{% static query.upload %}"></video>
+			<video width="40%" height="30%"><source src="{{ MEDIA_URL }}{{ query.upload }}"></video>
 			</div>
 			<span style="width: 60%;position: relative;float: right;margin-top: -10%;text-align: right;overflow: hidden;display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;">{{ video.title }}</span>
 			</td></tr>
@@ -38,7 +40,6 @@
 		</table>
 		</div>
 	</div>
-   </div>
    <div>
   <p><strong>Description:</strong> {{ query.description }}</p><br>
   </div>

@@ -11,7 +11,9 @@
 	</div>
 {% endif%}
 </div>
-<form name = "form" enctype = "multipart/form-data" action = "" method = "POST" >{% csrf_token %}
+<div class="container not-visible progress" id="progress">
+</div>
+<form  class='cfeproj-upload-form' name = "form" enctype = "multipart/form-data" action = "" id="upload_form" method = "POST" >{% csrf_token %}
 <div class="upload-video">
 	{% csrf_token %}
 		{% render_form serializer %}

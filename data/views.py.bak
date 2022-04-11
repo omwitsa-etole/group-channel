@@ -9,11 +9,22 @@ from django.db.models import Q
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.contrib import messages
-from rest_framework import viewsets, parsers
+from rest_framework import viewsets, parsers, permissions, status, authentication
 from .serializers import ImageSerializer, VideoSerializer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer
+from .config_aws import (
+    AWS_UPLOAD_BUCKET,
+    AWS_UPLOAD_REGION,
+    AWS_UPLOAD_ACCESS_KEY_ID,
+    AWS_UPLOAD_SECRET_KEY
+)
+import base64
+import hashlib
+import hmac
+import os
+import time
 
 def log_in(request):
     error = '';
@@ -127,7 +138,7 @@ class ImageDetailOutView(generic.DetailView):
 
 def VideoDetailView(request, pk):
     template_name = 'video_detail.html'
-    query = get_object_or_404(Video, pk=pk)
+    video = get_object_or_404(Video, pk=pk)
     video_list = Video.objects.all().order_by("-date_created")
     comments = Comment.objects.all()
     new_comment = None
@@ -137,7 +148,6 @@ def VideoDetailView(request, pk):
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.query = request.query
             new_comment.save()
     else:
         comment_form = CommentForm()
@@ -178,31 +188,50 @@ class ImageViewset(APIView):
         serializer = ImageSerializer(data=request.data)
         if not serializer.is_valid():
             error = 'upload failed'
+            messages.success(request, f'Image Upload failed')
             return Response({'serializer':serializer,'error':error})   
         serializer.save()
+        messages.success(request, f'Image Uploaded Successfully')
         error = 'upload success'
         return Response({'serializer':serializer,'error':error})
  
 class VideoViewset(APIView):
-    renderer_classes = [TemplateHTMLRenderer]
-    template_name = 'upload.html'
-    
     def get(self, request, pk):
-        video = get_object_or_404(User, pk=pk)
+        user = get_object_or_404(User, pk=pk)
         serializer = VideoSerializer()
         error = ''
         return Response({'serializer':serializer,'error':error})
         
     def post(self, request, pk):
-        video = get_object_or_404(User, pk=pk)
+        user = get_object_or_404(User, pk=pk)
         serializer = VideoSerializer(data=request.data)
         if not serializer.is_valid():
             error = 'upload failed'
+            messages.success(request, f'Video Upload failed')
             return Response({'serializer':serializer,'error':error})   
         serializer.save()
         messages.success(request, f'Video Uploaded Successfully')
         error = 'upload success'
         return Response({'serializer':serializer,'error':error})
+        
+class FileUploadCompleteHandler(APIView):
+    permission_classes = [permissions.IsAuthenticated]
+    authentication_classes = [authentication.SessionAuthentication]
+    
+    def post(self, request, *args, **kwargs):
+        file_id = request.POST.get('file')
+        size = request.POST.get('fileSize')
+        data = {}
+        type_ = request.POST.get('fileType')
+        if file_id:
+            obj = FileItem.objects.get(id=int(file_id))
+            obj.size = int(size)
+            obj.uploaded = True
+            obj.type = type_
+            obj.save()
+            data['id'] = obj.id
+            data['saved'] = True
+        return Response(data, status=status.HTTP_200_OK)
      
 def Settings(request):
     if request.session.has_key('username'):

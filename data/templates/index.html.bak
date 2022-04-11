@@ -18,7 +18,7 @@
 				</div>
 				<table>
 				<td id="table" onclick="window.location='{{ video.get_another_url }}'" style="cursor: pointer;">
-				<video width="50%" height="80%" controls> <source src="{{ MEDIA_URL }}{{ video.upload }}" type="video/mp4"></video>
+				<video width="50%" height="80%" controls> <source src="{% static video.upload %}" type="video/mp4"></video>
 				<div class="vid_description">
 				<span style="font-family: Times-New-Roman;font-size: 20px;text-align:justify;">{{ video.title }}</span><br>
 				<p style="font-family: Times New  Roman;font-size: 17px;">{{ video.description }}</p>
