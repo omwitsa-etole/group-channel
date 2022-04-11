@@ -177,9 +177,18 @@ ul {
 	width: 75%;
 	height: 100%;
 }
+.img_ls a{
+	display: inline;
+	position: relative;
+	margin-left: 2%;
+	margin-top: 2%;
+}
 .img {
 	position: relative;
 	cursor: pointer;
+	background-size: contain;
+	max-width: 30%;
+	max-height: 50%;
 }
 .title {
 	display: none;
