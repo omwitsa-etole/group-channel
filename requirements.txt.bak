@@ -6,6 +6,7 @@ djangorestframework==3.13.1
 django-s3direct==0.4.2
 s3transfer==0.4.0
 boto3==1.17.58
+botocore==1.24.37
 Django==3.2
 django-storages==1.11.1
 gunicorn==20.1.0
