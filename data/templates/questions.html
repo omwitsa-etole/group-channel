@@ -74,8 +74,8 @@ function showdescription(id, btn)
 	  <div class="dropdown">
 	  <a class="menu_btn">+Upload</a>
 	  <div class="dropdown_content">
-	  <a href="{% url 'upload_video' %}">Video</a>
-	  <a href="{% url 'upload_image' %}">Image</a>
+	  <a href="{{ user.get_absolute_url }}">Video</a>
+	  <a href="{{ user.get_another_url }}">Image</a>
 	  </div>
 	  </div>
 	  <div id="menu_div">

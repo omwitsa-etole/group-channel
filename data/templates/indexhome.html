@@ -5,7 +5,6 @@
 	{% block content %}
 		<div>
 			{% for video in video_list %}
-				{% load static %}
 				<div class="video_container">
 				<p id="dropbtn" onclick="showmenu({{ video.id }})" style="float: right;">...</p>
 				<div class="context-menu" id="context-menu">
@@ -13,7 +12,7 @@
 				<a href="">Add to Qeue</a>
 				<a href="{{ MEDIA_URL }}{{ video.upload }}" download="{{ query.title }}.mp4">Save for later</i></a>
 				<a href='{{ video.get_absolute_url }}' target="_blank">Open Video in new tab</a>
-				<a href="" onclick="copy(video.get_absolute_url)"><i>Copy Video Url</i></a>
+				<a href=""><i>Copy Video Url</i></a>
 				</div>
 				</div>
 				<table>
@@ -35,8 +34,8 @@
 		</div>
 		<div class="home_nav">
 		<div class="home_nav_cont">
-			<a href="{% url 'loginform' %}" class="active">VIDEOS</a>
-			<a href="{% url 'image_view' %}">IMAGES</a>
+			<a href="{% url 'video_out' %}" class="active">VIDEOS</a>
+			<a href="{% url 'image_out_view' %}">IMAGES</a>
 			<a href="{%  url 'questions_in' %}">Q&A</a>
 		</div>
 	</div>

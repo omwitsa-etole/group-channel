@@ -1,21 +1,12 @@
 <html>
-<head>
-<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-	<title>Sign Up</title>
-</head>
    <body>
 	<center>
 	  {{ error }}
       <form name = "form" action = "{% url 'login' %}"  method = "POST" >{% csrf_token %}
          
-         <div style = "min-width: 40%;">
+         <div style = "max-width:470px;">
             <center> {{ MyLoginForm.username.label_tag }}
-               <input type = "text" style = "margin-left:;padding: 4px 13px;" 
+               <input type = "text" style = "margin-left:20%;" 
                   placeholder = "Identifiant" name = "username" value="{{ MyLoginForm.username.value|default:"" }}"/>
             </center>
 			{% if MyLoginForm.username.errors %}
@@ -25,9 +16,9 @@
 			
          <br>
   
-         <div style = "min-width: 40%;">
+         <div style = "max-width:470px;">
             <center>{{ MyLoginForm.password.label_tag }}
-               <input type = "password" style = "margin-left:;padding: 4px 13px;" 
+               <input type = "password" style = "margin-left:20%;" 
                   placeholder = "password" name = "password" value="{{ MyLoginForm.password.value|default:"" }}" />
             </center>
 			{% if MyLoginForm.password.errors %}
@@ -37,11 +28,12 @@
 			
          <br>
          
-         <div style = "min-width: 40%;">
+         <div style = "max-width:470px;">
             <center> 
-				<a href="{% url 'forgot_pass' %}" style="margin-left: ;">Forgot Password?</a><br>
-				<a href="{% url 'sign_up' %}" style="margin-left: ;">Sign Up?</a><br>
-               <button style = "border:0px; background-color:#4285F4; height:35px; width:50%;margin-left:;" type = "submit" 
+				<a href="/video/in/forgetpass/" style="margin-left: 20%;">Forgot Password?</a><br>
+				<a href="{% url 'sign_up' %}" style="margin-left: 20%;">Sign Up?</a>
+               <button style = "border:0px; background-color:#4285F4; margin-top:8%;
+                  height:35px; width:80%;margin-left:19%;" type = "submit" 
                   value = "Login" >
                   <strong>Login</strong>
                </button><br>
@@ -49,7 +41,7 @@
          </div>
          
       </form>
-      <a href="/video/out/" style="margin-left:;"><button style="padding: 5px 8px;">Offline</button></a>
+      <a href="/video/out/" style="margin-left: 20%;"><button style="padding: 5px 8px;">Offline</button></a>
   </center>
   </body>
 </html>

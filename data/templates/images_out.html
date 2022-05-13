@@ -1,11 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% load static %}
 	<div class="image_container">
 		{% for image in image_list %}
 			<div class="image_ls">
-				<a href="{{ image.get_absolute_url }}"><img id="{{ image.id }}" src="{{ MEDIA_URL }}{{ image.picture }}" type="image"></a>
+				<img id="{{ image.id }}" src="{{ MEDIA_URL }}{{ image.picture }}" type="image">
 			</div>
 			<div class="title">{{ image.title }}</div>
 		{% empty %}

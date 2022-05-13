@@ -6,8 +6,6 @@ from data.views import ImageViewset, VideoViewset, FileUploadCompleteHandler
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-#router.register(r'in/upload/image', ImageViewset, basename='user')
-#router.register(r'in/upload/video', VideoViewset, basename='user')
 urlpatterns = router.urls
 
 urlpatterns = [
@@ -45,5 +43,4 @@ urlpatterns = [
     path('api/files/complete/<int:pk>', FileUploadCompleteHandler.as_view(), name='upload_complete'),
     path('in/upload/image/<int:pk>', views.ImageViewset.as_view(), name="upload_image"),
     path('channels/<int:id>/', views.ChannelDetailView.as_view(), name='channel_detail'),
-   # path('user/<int:pk>', views.UserDetailView.as_view(), name='user-detail'),
 ]+ router.urls

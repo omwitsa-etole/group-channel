@@ -9,22 +9,11 @@ from django.db.models import Q
 from django.contrib.auth import login, authenticate
 from django.urls import reverse_lazy
 from django.contrib import messages
+from rest_framework.views import APIView
 from rest_framework import viewsets, parsers, permissions, status, authentication
 from .serializers import ImageSerializer, VideoSerializer
-from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.renderers import TemplateHTMLRenderer
-from .config_aws import (
-    AWS_UPLOAD_BUCKET,
-    AWS_UPLOAD_REGION,
-    AWS_UPLOAD_ACCESS_KEY_ID,
-    AWS_UPLOAD_SECRET_KEY
-)
-import base64
-import hashlib
-import hmac
-import os
-import time
 
 def log_in(request):
     error = '';
@@ -102,6 +91,7 @@ class UserDetailView(LoginRequiredMixin, generic.DetailView):
     model = User
     context_object_name = 'user'
     template_name = 'details.html'
+    
 def HomeView(request):
     error = '';
     search_query = request.GET.get('search')
@@ -114,8 +104,7 @@ def HomeView(request):
         index = 0
     else:
         return render(request, 'login.html', {"error_log":error})
-        
-    return render(request, 'indexhome.html', locals())
+    
 def IndexView(request):
     username = 'not loged in'
     search_query = request.GET.get('search')
@@ -124,7 +113,6 @@ def IndexView(request):
     else:
         video_list = Video.objects.all().order_by("-date_created")
     return render(request, 'index.html', {"username" : username, "video_list": video_list})
-
 
 class VideoDetailOutView(generic.DetailView):
     model = Video
@@ -138,7 +126,7 @@ class ImageDetailOutView(generic.DetailView):
 
 def VideoDetailView(request, pk):
     template_name = 'video_detail.html'
-    video = get_object_or_404(Video, pk=pk)
+    query = get_object_or_404(Video, pk=pk)
     video_list = Video.objects.all().order_by("-date_created")
     comments = Comment.objects.all()
     new_comment = None
@@ -148,6 +136,7 @@ def VideoDetailView(request, pk):
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
+            new_comment.query = query
             new_comment.save()
     else:
         comment_form = CommentForm()
@@ -165,14 +154,13 @@ def ImageDetailView(request, pk):
         comment_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_comment = comment_form.save(commit=False)
-            new_comment.query = request.query
+            new_comment.query = query
             new_comment.save()
     else:
         comment_form = CommentForm()
         
     return render(request, template_name, locals())
     
-
 class ImageViewset(APIView):
     renderer_classes = [TemplateHTMLRenderer]
     template_name = 'upload2.html'
@@ -234,7 +222,8 @@ class FileUploadCompleteHandler(APIView):
             data['id'] = obj.id
             data['saved'] = True
         return Response(data, status=status.HTTP_200_OK)
-     
+    
+   
 def Settings(request):
     if request.session.has_key('username'):
          username = request.session['username']
@@ -265,7 +254,7 @@ def ImageView(request):
     else:
         return render(request, 'login.html', {}) 
         
-    return render(request, 'images.html', locals())
+    return render(request, 'images.html', {"username" : username,"image_list":image_list})
 def ImageOutView(request):
     username = "not logged in"
     search_query = request.GET.get('search') 
@@ -324,7 +313,7 @@ def QuestionDetailView(request, pk):
         answer_form = CommentForm(data=request.POST)
         if comment_form.is_valid():
             new_answer = comment_form.save(commit=False)
-            new_answer.question = request.question
+            new_answer.question = question
             new_answer.save()
     else:
         answer_form = CommentForm()
